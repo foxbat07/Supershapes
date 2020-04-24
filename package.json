@@ -4,8 +4,8 @@
   "description": "Supershapes via node",
   "main": "app.js",
   "scripts": {
-    "test": "test",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "run": "nodemon index.js"
   },
   "keywords": [
     "creative",
