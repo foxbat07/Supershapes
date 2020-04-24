@@ -2,7 +2,7 @@
   "name": "supershapes",
   "version": "1.0.0",
   "description": "Supershapes via node",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "build": "npm install",
     "start": "node index.js",
@@ -14,6 +14,10 @@
   ],
   "author": "Mohit Hingorani",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mohithingorani/Supershapes"
+  },
   "dependencies": {
     "compression": "^1.7.4",
     "express": "^4.17.1",
