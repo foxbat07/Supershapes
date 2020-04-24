@@ -4,7 +4,8 @@
   "description": "Supershapes via node",
   "main": "app.js",
   "scripts": {
-    "start": "npm install && node index.js",
+    "build": "npm install",
+    "start": "node index.js",
     "run": "nodemon index.js"
   },
   "keywords": [
