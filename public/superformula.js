@@ -27,7 +27,7 @@ lights[2].position.set( -100, -100, -100 );
 lights[3].position.set( 0, -100, 100 );
 
 var controls = new function() {
-    this.researchLink = 'http://paulbourke.net/geometry/supershape/';
+    this.researchLink = function() {window.open('http://paulbourke.net/geometry/supershape/')};
     this.backgroundColor = 0x323232;
     this.emissiveColor = 0x000000;
     this.shapeColor1 = 0xffffff;
@@ -57,7 +57,7 @@ var controls = new function() {
 };
 
 var general = gui.addFolder('Superformula 3D | Mohit Hingorani');
-general.add(controls,'researchLink').name('Research Link');
+general.add(controls,'researchLink').name('Learn more');
 general.addColor(controls, 'backgroundColor').name('Background');
 general.add(controls, 'wireframe').name('Show Wireframe');
 general.add(controls, 'stripes', 1, 3).step(1).name('Stripe Freq');
@@ -68,23 +68,26 @@ general.open();
 
 var f1 = gui.addFolder('Supershape 1');
 f1.add(controls, 'radius',1,5);
-f1.add(controls, 'a1',0.1,5);
-f1.add(controls, 'b1',0.1,5);
-f1.add(controls, 'm1',0,100).step(1);
+f1.add(controls, 'm1',0,100).step(1).name('m1 - lat freq');
 f1.add(controls, 'n11',0.1,10);
 f1.add(controls, 'n21',0.1,10);
 f1.add(controls, 'n31',0.1,10);
 f1.open();
 
 var f2 = gui.addFolder('Supershape 2');
+f2.add(controls, 'm2',0,100).step(1).name('m2 - long freq');
 f2.add(controls, 'height',1,5);
-f2.add(controls, 'a2',0.1,10);
-f2.add(controls, 'b2',0.1,10);
-f2.add(controls, 'm2',0,100).step(1);
 f2.add(controls, 'n12',0.1,10);
 f2.add(controls, 'n22',0.1,10);
 f2.add(controls, 'n32',0.1,10);
 f2.open();
+
+var f3 = gui.addFolder('Extra Controls Supershape');
+f3.add(controls, 'a1',0.1,5);
+f3.add(controls, 'b1',0.1,5);
+f3.add(controls, 'a2',0.1,10);
+f3.add(controls, 'b2',0.1,10);
+f3.close();
 
 
 geometry = new THREE.CylinderGeometry( 1, 1, controls.height, controls.radialSegments, controls.heightSegments, true );

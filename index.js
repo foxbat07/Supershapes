@@ -4,7 +4,7 @@ const helmet = require('helmet')
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 
 app.use(helmet());
 app.use(compression({
@@ -16,4 +16,4 @@ app.get('/', (req, res) => {
     res.send('Supershapes starting off');
 });
 
-app.listen(PORT, () => console.log('Supershapes is listening on port 3000 on local!'));
+app.listen(PORT, () => console.log('Supershapes is listening on port 3003 on local!'));
