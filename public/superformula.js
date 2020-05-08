@@ -95,12 +95,15 @@ f3.close();
 
 geometry = new THREE.CylinderGeometry( 1, 1, controls.height, controls.radialSegments, controls.heightSegments, true );
 var meshMaterial = new THREE.MeshPhongMaterial( { emissive: 0x000000, side: THREE.DoubleSide, flatShading: true, vertexColors: THREE.FaceColors } );
-var pointMaterial = new THREE.PointsMaterial( { blending: THREE.AdditiveBlending, color: 0xffffff, map: spriteMap,transparent: true, size: 0.5 } );
+// var meshMaterial = new THREE.MeshNormalMaterial( { side: THREE.DoubleSide } );
+var pointMaterial = new THREE.PointsMaterial( { blending: THREE.AdditiveBlending, color: 0xffffff, map: spriteMap,transparent: true, size: 0.75 } );
 var lineMaterial = new THREE.LineBasicMaterial( { color: 0xffffff } );
 // var meshMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, vertexColors: THREE.FaceColors, side: THREE.DoubleSide } );			
 var superShape = new THREE.Mesh( geometry, meshMaterial );
 var superPoints = new THREE.Points( geometry, pointMaterial );
 var superLine = new THREE.Line( geometry, lineMaterial );
+
+var quadMesh = makeQuadLines(superShape);
 
 init();
 animate();
@@ -113,7 +116,8 @@ function init(){
     // scene.add(superShape);
     scene.add(superPoints);
     // scene.add(superLine);
-
+    scene.add(quadMesh);
+    
     scene.add(lights[0]);
     scene.add(lights[1]);
     scene.add(lights[2]);
@@ -126,7 +130,7 @@ function animate() {
 
     scene.background = new THREE.Color(controls.backgroundColor);
     meshMaterial.wireframe = controls.wireframe;
-    meshMaterial.emissive.set(new THREE.Color(controls.emissiveColor));
+    // meshMaterial.emissive.set(new THREE.Color(controls.emissiveColor));
     lineMaterial.color.set(new THREE.Color(controls.emissiveColor));
     pointMaterial.color.setHex(controls.emissiveColor);
 
