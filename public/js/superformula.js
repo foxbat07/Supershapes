@@ -39,7 +39,7 @@ var lineMaterial = new THREE.LineBasicMaterial( { color: 0xffffff } );
 // var meshMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, vertexColors: THREE.FaceColors, side: THREE.DoubleSide } );			
 
 var quadMaterial = new THREE.LineBasicMaterial({
-   color: "orange",
+   color: "red",
    opacity: 0.3,
    transparent: true,
    blending: THREE.AdditiveBlending,
@@ -54,7 +54,6 @@ var superLine = new THREE.Line( geometry, lineMaterial );
 
 var quadGeometry = makeQuadLines(geometry);
 var quadMesh = new THREE.LineSegments(quadGeometry, quadMaterial);
-quadGeometry.addAttribute("position", new THREE.Vector3(0,0,0));
 
 init();
 animate();
