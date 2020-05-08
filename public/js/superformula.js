@@ -31,11 +31,13 @@ lights[3].position.set( 0, -1000, 1000 );
 
 
 geometry = new THREE.CylinderGeometry( 1, 1, controls.height, controls.radialSegments, controls.heightSegments, true );
+
 var meshMaterial = new THREE.MeshPhongMaterial( { emissive: 0x000000, side: THREE.DoubleSide, flatShading: true, vertexColors: THREE.FaceColors } );
 // var meshMaterial = new THREE.MeshNormalMaterial( { side: THREE.DoubleSide } );
 var pointMaterial = new THREE.PointsMaterial( { blending: THREE.AdditiveBlending, color: 0xffffff, map: spriteMap,transparent: true, size: 0.75 } );
 var lineMaterial = new THREE.LineBasicMaterial( { color: 0xffffff } );
 // var meshMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, vertexColors: THREE.FaceColors, side: THREE.DoubleSide } );			
+
 var quadMaterial = new THREE.LineBasicMaterial({
    color: "orange",
    opacity: 0.3,
