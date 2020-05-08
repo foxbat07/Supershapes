@@ -1,12 +1,12 @@
-// source Thrax S
+// Source via Thrax S
 // https://glitch.com/edit/#!/city-simple?path=public%2Fquadlines.js%3A1%3A0
 // https://glitch.com/~city-simple
-//let {THREE} = window
 
-function makeQuadLines(mesh) {
-  let geom = mesh.geometry.clone();
-  //if (geom.type != "Geometry")
-  //  geom = new THREE.Geometry().fromBufferGeometry(geom);
+// This function turns a regular geoemtry into lines that can be attached to a LineSegments mesh. 
+
+function makeQuadLines(typicalGeometry) {
+  let geom = typicalGeometry.clone();
+
   let v0 = new THREE.Vector3();
   let v1 = new THREE.Vector3();
   let v2 = new THREE.Vector3();
@@ -16,17 +16,9 @@ function makeQuadLines(mesh) {
   let verts = geom.vertices;
   let lines = [];
   var geometry = new THREE.BufferGeometry();
-  var material = new THREE.LineBasicMaterial({
-    color: "orange",
-    opacity: 1,
-    transparent: true,
-    blending: THREE.AdditiveBlending,
-    vertexColors: false,
-    depthWrite: false,
-    //depthTest: false
-  });
+
   var indices = [];
-  console.log("mcd")
+  console.log("mcd");
   if(geom.type=='BufferGeometry'){
     let idx = geom.index.array
     let vts = geom.attributes.position.array
@@ -68,8 +60,6 @@ function makeQuadLines(mesh) {
     let d21 = Math.abs(e2.dot(e1));
     let d02 = Math.abs(e0.dot(e2));
 
-    //if(Math.min(d10,d21,d02)>0.1)continue
-
     //find 2 ortho-ish edges
     if (d10 < d21) {
       if (d10 < d02) {
@@ -88,13 +78,11 @@ function makeQuadLines(mesh) {
   let idx = 0;
   geometry.setIndex(indices);
 
-  console.log(mesh.geometry);
-  
-  if (mesh.geometry) {
+  if (geometry) {
     geometry.addAttribute("position", new THREE.Vector3(0,0,0));
-  //   geometry.addAttribute("color", mesh.geometry.attributes.color);
   }
-  geometry.computeBoundingSphere();
 
-  return new THREE.LineSegments(geometry, material);
+  console.log(geometry);
+  return geometry;
 }
+
