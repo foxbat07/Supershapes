@@ -35,9 +35,9 @@ var controls = new function() {
 var general = gui.addFolder('Superformula 3D | MH');
 general.add(controls,'researchLink').name('Learn more');
 general.addColor(controls, 'backgroundColor').name('Background');
-general.add(controls, 'form', [ 'None', 'Lines', 'Points', 'Fullform', 'Quadwireframe',]);
+general.add(controls, 'form', [ 'None', 'Lines', 'Points', 'Fullform']);
 
-general.add(controls, 'wireframe').name('Show Quad Wireframe');
+// general.add(controls, 'wireframe').name('Show Quad Wireframe');
 general.addColor(controls, 'shapeColor1').name('Mesh Color');
 general.addColor(controls, 'emissiveColor').name('Emissive Color');
 general.add(controls, 'stripes', 0, 3).step(1).name('Stripe Freq');
