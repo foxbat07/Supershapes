@@ -5,11 +5,11 @@ var controls = new function() {
     this.researchLink = function() {window.open('http://paulbourke.net/geometry/supershape/')};
     this.backgroundColor = 0x323232;
     this.form = 'Points';
-    this.emissiveColor = 0xffffff;
+    this.emissiveColor = 0xa8a8a8;
     this.shapeColor1 = 0xffffff;
+    this.stripes = 0;
     this.shapeColor2 = 0x000000;
-    this.stripes = 1;
-    
+
     this.radialSegments = 80;
     this.heightSegments = 60;
     this.wireframe = false;
@@ -35,13 +35,13 @@ var controls = new function() {
 var general = gui.addFolder('Superformula 3D | MH');
 general.add(controls,'researchLink').name('Learn more');
 general.addColor(controls, 'backgroundColor').name('Background');
-general.add(controls, 'form', [ 'Lines', 'Points', 'Quadwireframe', 'Fullform']);
+general.add(controls, 'form', [ 'None', 'Lines', 'Points', 'Fullform', 'Quadwireframe',]);
 
-general.add(controls, 'wireframe').name('Show Wireframe');
-general.add(controls, 'stripes', 1, 3).step(1).name('Stripe Freq');
-general.addColor(controls, 'shapeColor1').name('Mesh Color 1');
-general.addColor(controls, 'shapeColor2').name('Mesh Color 2');
+general.add(controls, 'wireframe').name('Show Quad Wireframe');
+general.addColor(controls, 'shapeColor1').name('Mesh Color');
 general.addColor(controls, 'emissiveColor').name('Emissive Color');
+general.add(controls, 'stripes', 0, 3).step(1).name('Stripe Freq');
+general.addColor(controls, 'shapeColor2').name('Stripe Color');
 general.open();
 
 var f1 = gui.addFolder('Supershape 1');
@@ -60,7 +60,7 @@ f2.add(controls, 'n22',0.1,10);
 f2.add(controls, 'n32',0.1,10);
 f2.close();
 
-var f3 = gui.addFolder('Extra Controls Supershape');
+var f3 = gui.addFolder('Extra Controls SS');
 f3.add(controls, 'a1',0.1,10);
 f3.add(controls, 'b1',0.1,10);
 f3.add(controls, 'a2',0.1,20);

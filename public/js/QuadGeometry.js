@@ -18,7 +18,7 @@ function makeQuadLines(typicalGeometry) {
   var lsGeometry = new THREE.BufferGeometry();
 
   var indices = [];
-  console.log("mcd");
+  // console.log("Quad Buffer Geometry");
   if(geom.type=='BufferGeometry'){
     let idx = geom.index.array
     let vts = geom.attributes.position.array
@@ -77,12 +77,18 @@ function makeQuadLines(typicalGeometry) {
   }
   let idx = 0;
   lsGeometry.setIndex(indices);
-
+  lsGeometry.computeBoundingSphere();
+  
+  // var lsVertices;
+  // for ( var i = 0 ; i < typicalGeometry.vertices.length ; i++ ) {
+  //   lsVertices.push(typicalGeometry.vertices);
+  // }
+  
   if (lsGeometry) {
     lsGeometry.setAttribute("position", new THREE.Vector3(0,0,0));
   }
 
-  console.log(lsGeometry);
+  // console.log(lsGeometry);
   return lsGeometry;
 }
 
