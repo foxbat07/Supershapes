@@ -15,7 +15,7 @@ function makeQuadLines(typicalGeometry) {
   let e2 = new THREE.Vector3();
   let verts = geom.vertices;
   let lines = [];
-  var geometry = new THREE.BufferGeometry();
+  var lsGeometry = new THREE.BufferGeometry();
 
   var indices = [];
   console.log("mcd");
@@ -76,13 +76,13 @@ function makeQuadLines(typicalGeometry) {
     }
   }
   let idx = 0;
-  geometry.setIndex(indices);
+  lsGeometry.setIndex(indices);
 
-  if (geometry) {
-    geometry.addAttribute("position", new THREE.Vector3(0,0,0));
+  if (lsGeometry) {
+    lsGeometry.setAttribute("position", new THREE.Vector3(0,0,0));
   }
 
-  console.log(geometry);
-  return geometry;
+  console.log(lsGeometry);
+  return lsGeometry;
 }
 
