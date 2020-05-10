@@ -35,14 +35,16 @@ var controls = new function() {
 var general = gui.addFolder('Superformula 3D | MH');
 general.add(controls,'researchLink').name('Learn more');
 general.addColor(controls, 'backgroundColor').name('Background');
-general.add(controls, 'form', [ 'None', 'Lines', 'Points', 'Fullform']);
-
-general.add(controls, 'wireframe').name('Show Quad Wireframe');
-general.addColor(controls, 'shapeColor1').name('Mesh Color');
-general.addColor(controls, 'emissiveColor').name('Emissive Color');
-general.add(controls, 'stripes', 0, 3).step(1).name('Stripe Freq');
-general.addColor(controls, 'shapeColor2').name('Stripe Color');
 general.open();
+
+var f0 = gui.addFolder('Form & Shape');
+f0.add(controls, 'form', [ 'None', 'Lines', 'Points', 'Fullform']);
+f0.add(controls, 'wireframe').name('Show Quad Wireframe');
+f0.addColor(controls, 'shapeColor1').name('Mesh Color');
+f0.addColor(controls, 'emissiveColor').name('Emissive Color');
+f0.add(controls, 'stripes', 0, 3).step(1).name('Stripe Freq');
+f0.addColor(controls, 'shapeColor2').name('Stripe Color');
+f0.open();
 
 var f1 = gui.addFolder('Supershape 1');
 f1.add(controls, 'm1',0,100).step(1).name('m1 - lat freq');
@@ -60,7 +62,7 @@ f2.add(controls, 'n22',0.1,10);
 f2.add(controls, 'n32',0.1,10);
 f2.close();
 
-var f3 = gui.addFolder('Extra Controls SS');
+var f3 = gui.addFolder('More SS');
 f3.add(controls, 'a1',0.1,10);
 f3.add(controls, 'b1',0.1,10);
 f3.add(controls, 'a2',0.1,20);
