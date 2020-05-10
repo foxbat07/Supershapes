@@ -1,7 +1,12 @@
 // gui initialize
 var gui = new dat.GUI();
 
+// set time and clocks
+var date = new Date();
+var currentTime = date.getTime();
+
 var controls = new function() {
+    this.takeImage = function(){ saveAsImage() };
     this.researchLink = function() {window.open('http://paulbourke.net/geometry/supershape/')};
     this.backgroundColor = 0x1a1a1a;
     this.form = 'Fullform';
@@ -33,11 +38,12 @@ var controls = new function() {
 };
 
 var general = gui.addFolder('Superformula 3D | MH');
+general.add(controls, 'takeImage').name('Take Screenshot');
 general.add(controls,'researchLink').name('Learn more');
 general.addColor(controls, 'backgroundColor').name('Background');
 general.open();
 
-var f0 = gui.addFolder('Form & Shape');
+var f0 = gui.addFolder('Form & Color');
 f0.add(controls, 'form', [ 'None', 'Lines', 'Points', 'Fullform']);
 f0.add(controls, 'wireframe').name('Show Quad Wireframe');
 f0.addColor(controls, 'shapeColor1').name('Mesh Color');
@@ -67,4 +73,35 @@ f3.add(controls, 'a1',0.1,10);
 f3.add(controls, 'b1',0.1,10);
 f3.add(controls, 'a2',0.1,20);
 f3.add(controls, 'b2',0.1,20);
+f3.add(controls,'researchLink').name('Learn more');
 f3.close();
+
+// Image saving
+
+
+function saveAsImage() {
+    var imgData;
+    try {
+        var strMime = "image/jpeg";
+        var strDownloadMime = "image/octet-stream";
+        imgData = renderer.domElement.toDataURL(strMime);
+        var fileName = 'supershape-image-' + currentTime+ '.jpg';
+        saveFile(imgData.replace(strMime, strDownloadMime), fileName);
+    } catch (e) {
+        console.log(e);
+        return;
+    }
+}
+
+var saveFile = function (strData, filename) {
+    var link = document.createElement('a');
+    if (typeof link.download === 'string') {
+        document.body.appendChild(link); //Firefox requires the link to be in the body
+        link.download = filename;
+        link.href = strData;
+        link.click();
+        document.body.removeChild(link); //remove the link when done
+    } else {
+        location.replace(uri);
+    }
+}
