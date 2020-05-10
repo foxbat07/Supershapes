@@ -75,7 +75,7 @@ function makeQuadLines(typicalGeometry) {
       }
     }
   }
-  let idx = 0;
+
   lsGeometry.setIndex(indices);
   lsGeometry.computeBoundingSphere();
   

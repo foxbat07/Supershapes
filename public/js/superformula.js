@@ -18,15 +18,15 @@ var points = [];
 var colors = [];
 var faces = [];
 
-lights[0] = new THREE.PointLight( 0xffffff, 0, 0 );
+lights[0] = new THREE.PointLight( 0xffffff, 1, 0 );
 lights[1] = new THREE.PointLight( 0xffffff, 1, 0 );
 lights[2] = new THREE.PointLight( 0xffffff, 1, 0 );
 lights[3] = new THREE.PointLight( 0xffffff, 1, 0 );
 
-lights[0].position.set( 0, 0, 2000 );
-lights[1].position.set( 1000, 2000, 1000 );
-lights[2].position.set( -1000, -1000, -1000 );
-lights[3].position.set( 0, -1000, 1000 );
+lights[0].position.set( 0, -200, 1000 );
+lights[1].position.set( -1000, 0, -1000 );
+lights[2].position.set( 1000, 0, -1000 );
+lights[3].position.set( 0, 500, 1000 );
 
 //split geometry for better control
 var geometry = new THREE.CylinderGeometry( 1, 1, controls.height, controls.radialSegments, controls.heightSegments, true );
@@ -198,64 +198,3 @@ function showShape(form) {
         superShape.visible = superPoints.visible = superLine.visible = false;
     }
 };
-
-
-
-
-function createSuperShape(heightSegments, widthSegments) {
-
-    // reset variables
-    vertices = [];
-
-   // update shape, we move around each ring of vertices and update the position
-   for ( var q = 0 ; q < heightSegments + 1; q++)
-   {	
-       for ( var p = 0 ; p < widthSegments; p++)
-       {
-           var j = ( q * Math.PI ) / (heightSegments ) - Math.PI/2;
-           var i = ( p * 2 * Math.PI ) / (widthSegments ) - Math.PI;
-           
-           var t11,t21,r1;
-           var t12,t22,r2;
-           var x,y,z;
-           
-           t11 = Math.cos((controls.m1 * i) /4 ) / controls.a1;
-           t11 = Math.abs(t11);
-           t11 = Math.pow(t11,controls.n21);
-
-           t21 = Math.sin((controls.m1 * i) /4 ) / controls.b1;
-           t21 = Math.abs(t21);
-           t21 = Math.pow(t21,controls.n31);
-
-           r1 = Math.pow(t11+t21, 1/controls.n11);
-
-           t12 = Math.cos((controls.m2 * j) /4 ) / controls.a2;
-           t12 = Math.abs(t12);
-           t12 = Math.pow(t12,controls.n22);
-
-           t22 = Math.sin((controls.m2 * j) /4 ) / controls.b2;
-           t22 = Math.abs(t22);
-           t22 = Math.pow(t22,controls.n32);
-
-           r2 = Math.pow(t12+t22, 1/controls.n12);
-
-           if( Math.abs(r1 || r2) == 0 ){
-               x = 0;
-               y = 0;
-               z = 0;
-           } else {
-               r1 = 1/r1;
-               r2 = 1/r2;
-               
-           x  = r1 * Math.cos(i) * r2 * Math.cos(j);
-           y =  r2 * Math.sin(j);
-           z =  r1 * Math.sin(i) * r2 * Math.cos(j);
-           }
-           
-           // push the point to vertices
-           vertices.push( new THREE.Vector3( controls.radius * x, controls.height * y, controls.radius * z ));
-       }
-   }
-
-   return vertices;
-}

@@ -3,11 +3,11 @@ var gui = new dat.GUI();
 
 var controls = new function() {
     this.researchLink = function() {window.open('http://paulbourke.net/geometry/supershape/')};
-    this.backgroundColor = 0x323232;
-    this.form = 'Points';
-    this.emissiveColor = 0xa8a8a8;
+    this.backgroundColor = 0x1a1a1a;
+    this.form = 'Fullform';
+    this.emissiveColor = 0xa000000;
     this.shapeColor1 = 0xffffff;
-    this.stripes = 0;
+    this.stripes = 1;
     this.shapeColor2 = 0x000000;
 
     this.radialSegments = 80;
@@ -37,7 +37,7 @@ general.add(controls,'researchLink').name('Learn more');
 general.addColor(controls, 'backgroundColor').name('Background');
 general.add(controls, 'form', [ 'None', 'Lines', 'Points', 'Fullform']);
 
-// general.add(controls, 'wireframe').name('Show Quad Wireframe');
+general.add(controls, 'wireframe').name('Show Quad Wireframe');
 general.addColor(controls, 'shapeColor1').name('Mesh Color');
 general.addColor(controls, 'emissiveColor').name('Emissive Color');
 general.add(controls, 'stripes', 0, 3).step(1).name('Stripe Freq');
