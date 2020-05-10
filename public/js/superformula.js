@@ -53,7 +53,7 @@ var superPoints = new THREE.Points( geometry, pointMaterial );
 var superLine = new THREE.Line( geometry, lineMaterial );
 
 var quadGeometry = makeQuadLines(geometry.clone());
-var quadMesh = new THREE.LineSegments(quadGeometry, quadMaterial);
+var superQuad = new THREE.LineSegments(quadGeometry, quadMaterial);
 quadGeometry.addAttribute("position", new THREE.Vector3(0,0,0));
 
 init();
@@ -64,10 +64,10 @@ function init(){
     trackBallControls.rotateSpeed = 5;
     trackBallControls.zoomSpeed = 2;
 
-    // scene.add(superShape);
-    // scene.add(superPoints);
+    scene.add(superPoints);
     scene.add(superLine);
-    scene.add(quadMesh);
+    scene.add(superShape);
+    scene.add(superQuad);
     
     scene.add(lights[0]);
     scene.add(lights[1]);
@@ -77,14 +77,15 @@ function init(){
 
 function animate() {
     requestAnimationFrame(animate);
-    trackBallControls.update();
-
     scene.background = new THREE.Color(controls.backgroundColor);
+
+    trackBallControls.update();
+    // showShape(controls.form);
+
     meshMaterial.wireframe = controls.wireframe;
     // meshMaterial.emissive.set(new THREE.Color(controls.emissiveColor));
     lineMaterial.color.set(new THREE.Color(controls.emissiveColor));
     pointMaterial.color.setHex(controls.emissiveColor);
-
     superPoints.geometry.colorsNeedUpdate = true;
 
     render();
@@ -95,6 +96,8 @@ function render() {
     points = [];
     colors = [];
     faces = [];
+
+    // update shape
 
     for ( var q = 0 ; q < controls.heightSegments + 1; q++)
     {	
@@ -146,18 +149,20 @@ function render() {
         }
     }
     geometry.vertices = points;		// very important
-        
-    for ( var i = 0; i < geometry.faces.length; i +=2 ) {
-        // if(parseInt(i/120)%2 == 0) { alternate along long axis
-        if(i % (4 * parseInt(controls.stripes)) == 0) {
-            geometry.faces[i].color.set(controls.shapeColor1);
-            geometry.faces[i+1].color.set(controls.shapeColor1);
-        }
-        else {
-            geometry.faces[i].color.set(controls.shapeColor2);
-            geometry.faces[i+1].color.set(controls.shapeColor2);
-        }
-    }
+    
+    // update face color 
+
+    // for ( var i = 0; i < geometry.faces.length; i +=2 ) {
+    //     // if(parseInt(i/120)%2 == 0) { alternate along long axis
+    //     if(i % (4 * parseInt(controls.stripes)) == 0) {
+    //         geometry.faces[i].color.set(controls.shapeColor1);
+    //         geometry.faces[i+1].color.set(controls.shapeColor1);
+    //     }
+    //     else {
+    //         geometry.faces[i].color.set(controls.shapeColor2);
+    //         geometry.faces[i+1].color.set(controls.shapeColor2);
+    //     }
+    // }
             
     geometry.verticesNeedUpdate = true;
     geometry.elementsNeedUpdate = true;
@@ -171,3 +176,24 @@ window.addEventListener( 'resize', function () {
 
 }, false );
 
+function showShape(form) {
+    if(form == 'quadwireframe') {
+        superQuad.visible = true;
+        superShape.visible = superPoints.visible = superLine.visible = false;
+    }
+
+    if(form == 'lines') {
+        superLine.visible = true;
+        superShape.visible = superPoints.visible = superQuad.visible = false;
+    }
+    
+    if(form == 'points') {
+        superPoints.visible = true;
+        superShape.visible = superQuad.visible = superLine.visible = false;
+    }
+    
+    if(form == 'fullform') {
+        superShape.visible = true;
+        superQuad.visible = superPoints.visible = superLine.visible = false;
+    }
+};
