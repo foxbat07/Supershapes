@@ -30,7 +30,7 @@ lights[3].position.set( 0, -1000, 1000 );
 
 
 var geometry = new THREE.CylinderGeometry( 1, 1, controls.height, controls.radialSegments, controls.heightSegments, true );
-var quadGeometry = makeQuadLines(geometry.clone());
+var quadGeometry = makeQuadLines(geometry);
 quadGeometry.addAttribute("position", new THREE.Vector3(0,0,0));
 
 // var meshMaterial = new THREE.MeshNormalMaterial( { side: THREE.DoubleSide } );
@@ -45,7 +45,6 @@ var superPoints = new THREE.Points( geometry, pointMaterial );
 var superLine = new THREE.Line( geometry, lineMaterial );
 var superQuad = new THREE.LineSegments(quadGeometry, quadMaterial);
 
-
 init();
 animate();
 
@@ -56,8 +55,8 @@ function init(){
 
     scene.add(superPoints);
     scene.add(superLine);
-    scene.add(superShape);
     scene.add(superQuad);
+    scene.add(superShape);
     
     scene.add(lights[0]);
     scene.add(lights[1]);
@@ -67,16 +66,17 @@ function init(){
 
 function animate() {
     requestAnimationFrame(animate);
+    trackBallControls.update();
     scene.background = new THREE.Color(controls.backgroundColor);
 
-    trackBallControls.update();
     showShape(controls.form);
 
     // meshMaterial.wireframe = controls.wireframe;
     meshMaterial.emissive.set(new THREE.Color(controls.emissiveColor));
-    lineMaterial.color.set(new THREE.Color(controls.emissiveColor));
-    pointMaterial.color.set(new THREE.Color(controls.emissiveColor));
-    quadMaterial.color.set(new THREE.Color(controls.emissiveColor));
+    meshMaterial.color.set(new THREE.Color(controls.shapeColor1));
+    lineMaterial.color.set(new THREE.Color(controls.shapeColor1));
+    pointMaterial.color.set(new THREE.Color(controls.shapeColor1));
+    quadMaterial.color.set(new THREE.Color(controls.shapeColor1));
     superPoints.geometry.colorsNeedUpdate = true;
 
     render();
@@ -84,7 +84,7 @@ function animate() {
 
 function render() {
     // reset variables
-    points = [];
+    vertices = [];
     colors = [];
     faces = [];
 
@@ -133,11 +133,11 @@ function render() {
             z =  r1 * Math.sin(i) * r2 * Math.cos(j);
             }
             
-            // push the point to points
-            points.push( new THREE.Vector3( controls.radius * x, controls.height * y, controls.radius * z ));
+            // push the point to vertices
+            vertices.push( new THREE.Vector3( controls.radius * x, controls.height * y, controls.radius * z ));
         }
     }
-    geometry.vertices = points;		// very important
+    geometry.vertices = vertices;		// very important
     
     // update face color 
     // for ( var i = 0; i < geometry.faces.length; i +=2 ) {
