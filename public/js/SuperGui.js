@@ -39,7 +39,6 @@ var controls = new function() {
 
 var general = gui.addFolder('Superformula 3D | MH');
 general.add(controls, 'takeImage').name('Take Screenshot');
-general.add(controls,'researchLink').name('Learn more');
 general.addColor(controls, 'backgroundColor').name('Background');
 general.open();
 
