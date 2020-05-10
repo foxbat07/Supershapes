@@ -4,7 +4,7 @@ var gui = new dat.GUI();
 var controls = new function() {
     this.researchLink = function() {window.open('http://paulbourke.net/geometry/supershape/')};
     this.backgroundColor = 0x323232;
-    this.form = 'points';
+    this.form = 'Points';
     this.emissiveColor = 0xffffff;
     this.shapeColor1 = 0xffffff;
     this.shapeColor2 = 0x000000;
@@ -35,7 +35,7 @@ var controls = new function() {
 var general = gui.addFolder('Superformula 3D | MH');
 general.add(controls,'researchLink').name('Learn more');
 general.addColor(controls, 'backgroundColor').name('Background');
-general.add(controls, 'form', [ 'lines', 'points', 'quadwireframe', 'fullform']);
+general.add(controls, 'form', [ 'Lines', 'Points', 'Quadwireframe', 'Fullform']);
 
 general.add(controls, 'wireframe').name('Show Wireframe');
 general.add(controls, 'stripes', 1, 3).step(1).name('Stripe Freq');

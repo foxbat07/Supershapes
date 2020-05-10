@@ -17,7 +17,6 @@ var lights = [];
 var points = [];
 var colors = [];
 var faces = [];
-var geometry;
 
 lights[0] = new THREE.PointLight( 0xffffff, 0, 0 );
 lights[1] = new THREE.PointLight( 0xffffff, 1, 0 );
@@ -30,31 +29,22 @@ lights[2].position.set( -1000, -1000, -1000 );
 lights[3].position.set( 0, -1000, 1000 );
 
 
-geometry = new THREE.CylinderGeometry( 1, 1, controls.height, controls.radialSegments, controls.heightSegments, true );
+var geometry = new THREE.CylinderGeometry( 1, 1, controls.height, controls.radialSegments, controls.heightSegments, true );
+var quadGeometry = makeQuadLines(geometry.clone());
+quadGeometry.addAttribute("position", new THREE.Vector3(0,0,0));
 
-var meshMaterial = new THREE.MeshPhongMaterial( { emissive: 0x000000, side: THREE.DoubleSide, flatShading: true, vertexColors: THREE.FaceColors } );
 // var meshMaterial = new THREE.MeshNormalMaterial( { side: THREE.DoubleSide } );
+// var meshMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, vertexColors: THREE.FaceColors, side: THREE.DoubleSide } );			
+var meshMaterial = new THREE.MeshPhongMaterial( { emissive: 0x000000, side: THREE.DoubleSide, flatShading: true, vertexColors: THREE.FaceColors } );
 var pointMaterial = new THREE.PointsMaterial( { blending: THREE.AdditiveBlending, color: 0xffffff, map: spriteMap,transparent: true, size: 1 } );
 var lineMaterial = new THREE.LineBasicMaterial( { color: 0xffffff } );
-// var meshMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, vertexColors: THREE.FaceColors, side: THREE.DoubleSide } );			
-
-var quadMaterial = new THREE.LineBasicMaterial({
-   color: "orange",
-   opacity: 0.3,
-   transparent: true,
-   blending: THREE.AdditiveBlending,
-   vertexColors: false,
-   depthWrite: false,
-   depthTest: false
- });
+var quadMaterial = new THREE.LineBasicMaterial({ color: "orange", opacity: 0.3, transparent: true, blending: THREE.AdditiveBlending, vertexColors: false, depthWrite: false, depthTest: false });
 
 var superShape = new THREE.Mesh( geometry, meshMaterial );
 var superPoints = new THREE.Points( geometry, pointMaterial );
 var superLine = new THREE.Line( geometry, lineMaterial );
-
-var quadGeometry = makeQuadLines(geometry.clone());
 var superQuad = new THREE.LineSegments(quadGeometry, quadMaterial);
-quadGeometry.addAttribute("position", new THREE.Vector3(0,0,0));
+
 
 init();
 animate();
@@ -80,12 +70,13 @@ function animate() {
     scene.background = new THREE.Color(controls.backgroundColor);
 
     trackBallControls.update();
-    // showShape(controls.form);
+    showShape(controls.form);
 
-    meshMaterial.wireframe = controls.wireframe;
-    // meshMaterial.emissive.set(new THREE.Color(controls.emissiveColor));
+    // meshMaterial.wireframe = controls.wireframe;
+    meshMaterial.emissive.set(new THREE.Color(controls.emissiveColor));
     lineMaterial.color.set(new THREE.Color(controls.emissiveColor));
-    pointMaterial.color.setHex(controls.emissiveColor);
+    pointMaterial.color.set(new THREE.Color(controls.emissiveColor));
+    quadMaterial.color.set(new THREE.Color(controls.emissiveColor));
     superPoints.geometry.colorsNeedUpdate = true;
 
     render();
@@ -98,7 +89,6 @@ function render() {
     faces = [];
 
     // update shape
-
     for ( var q = 0 ; q < controls.heightSegments + 1; q++)
     {	
         for ( var p = 0 ; p < controls.radialSegments; p++)
@@ -119,7 +109,6 @@ function render() {
             t21 = Math.pow(t21,controls.n31);
 
             r1 = Math.pow(t11+t21, 1/controls.n11);
-
 
             t12 = Math.cos((controls.m2 * j) /4 ) / controls.a2;
             t12 = Math.abs(t12);
@@ -151,7 +140,6 @@ function render() {
     geometry.vertices = points;		// very important
     
     // update face color 
-
     // for ( var i = 0; i < geometry.faces.length; i +=2 ) {
     //     // if(parseInt(i/120)%2 == 0) { alternate along long axis
     //     if(i % (4 * parseInt(controls.stripes)) == 0) {
@@ -163,9 +151,12 @@ function render() {
     //         geometry.faces[i+1].color.set(controls.shapeColor2);
     //     }
     // }
-            
+
+    // quadGeometry.verticesNeedUpdate = true;
+    // quadGeometry.elementsNeedUpdate = true;
     geometry.verticesNeedUpdate = true;
     geometry.elementsNeedUpdate = true;
+
     renderer.render( scene, camera );
 }
 
@@ -177,22 +168,22 @@ window.addEventListener( 'resize', function () {
 }, false );
 
 function showShape(form) {
-    if(form == 'quadwireframe') {
+    if(form == 'Quadwireframe') {
         superQuad.visible = true;
         superShape.visible = superPoints.visible = superLine.visible = false;
     }
 
-    if(form == 'lines') {
+    else if(form == 'Lines') {
         superLine.visible = true;
         superShape.visible = superPoints.visible = superQuad.visible = false;
     }
     
-    if(form == 'points') {
+    else if(form == 'Points') {
         superPoints.visible = true;
         superShape.visible = superQuad.visible = superLine.visible = false;
     }
     
-    if(form == 'fullform') {
+    else if(form == 'Fullform') {
         superShape.visible = true;
         superQuad.visible = superPoints.visible = superLine.visible = false;
     }
