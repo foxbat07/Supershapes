@@ -164,8 +164,8 @@ function render() {
     lineGeometry.verticesNeedUpdate = true;
     geometry.verticesNeedUpdate = true;
     geometry.elementsNeedUpdate = true;
-    
-    quadGeometry = makeQuadLines(geometry);
+
+    // quadGeometry = makeQuadLines(geometry);
 
     renderer.render( scene, camera );
 }

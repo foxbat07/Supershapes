@@ -79,11 +79,6 @@ function makeQuadLines(typicalGeometry) {
   lsGeometry.setIndex(indices);
   lsGeometry.computeBoundingSphere();
   
-  // var lsVertices;
-  // for ( var i = 0 ; i < typicalGeometry.vertices.length ; i++ ) {
-  //   lsVertices.push(typicalGeometry.vertices);
-  // }
-  
   if (lsGeometry) {
     lsGeometry.setAttribute("position", new THREE.Vector3(0,0,0));
   }
