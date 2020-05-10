@@ -77,11 +77,9 @@ function animate() {
     
     superQuad.visible = controls.wireframe;
     meshMaterial.emissive.set(new THREE.Color(controls.emissiveColor));
-    meshMaterial.color.set(new THREE.Color(controls.shapeColor1));
     lineMaterial.color.set(new THREE.Color(controls.shapeColor1));
     quadMaterial.color.set(new THREE.Color(controls.shapeColor1));
     pointMaterial.color.set(new THREE.Color(controls.shapeColor1));
-    // superPoints.geometry.colorsNeedUpdate = true;
 
     render();
 };
