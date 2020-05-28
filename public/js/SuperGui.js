@@ -37,7 +37,7 @@ var controls = new function() {
 var general = gui.addFolder('Superformula 3D');
 general.add(controls, 'takeImage').name('Take Screenshot');
 general.add(controls, 'exportShape').name('Export Shape');
-general.add(controls, 'researchLink').name('Learn More');
+general.add(controls, 'researchLink').name('Learn more');
 general.open();
 
 var f0 = gui.addFolder('Form & Color');
