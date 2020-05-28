@@ -57,6 +57,8 @@ f1.add(controls, 'radius',1,1000);
 f1.add(controls, 'n11',0.1,10);
 f1.add(controls, 'n21',0.1,10);
 f1.add(controls, 'n31',0.1,10);
+f1.add(controls, 'a1',0.1,10);
+f1.add(controls, 'b1',0.1,10);
 f1.close();
 
 var f2 = gui.addFolder('Supershape 2');
@@ -65,12 +67,6 @@ f2.add(controls, 'height',1,1000);
 f2.add(controls, 'n12',0.1,10);
 f2.add(controls, 'n22',0.1,10);
 f2.add(controls, 'n32',0.1,10);
+f2.add(controls, 'a2',0.1,20);
+f2.add(controls, 'b2',0.1,20);
 f2.close();
-
-var f3 = gui.addFolder('More SS');
-f3.add(controls, 'a1',0.1,10);
-f3.add(controls, 'b1',0.1,10);
-f3.add(controls, 'a2',0.1,20);
-f3.add(controls, 'b2',0.1,20);
-f3.add(controls,'researchLink').name('Learn more');
-f3.close();
