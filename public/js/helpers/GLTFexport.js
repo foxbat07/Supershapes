@@ -4,10 +4,10 @@ var gltfExporter = new THREE.GLTFExporter();
 var date = new Date();
 var currentTime = date.getTime();
 
-function exportGLTF( input ) {
+function exportGLTF() {
     var options = {};
 
-    gltfExporter.parse( input, function ( result ) {
+    gltfExporter.parse( superShape, function ( result ) {
         var fileName = 'supershape-object-'+currentTime;
         if ( result instanceof ArrayBuffer ) {
             saveArrayBuffer( result, fileName +'.glb' );

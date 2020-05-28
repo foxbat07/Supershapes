@@ -1,9 +1,10 @@
 var gui = new dat.GUI();
-var gltfExporter = new THREE.GLTFExporter();
+
+
 
 var controls = new function() {
     this.takeImage = function(){ saveAsImage() };
-    this.exportShape = function(){ exportGLTF(superShape) };
+    this.exportShape = function(){ exportGLTF() };
     this.researchLink = function() {window.open('http://paulbourke.net/geometry/supershape/')};
     this.backgroundColor = 0x1a1a1a;
     this.form = 'Fullform';
@@ -35,8 +36,8 @@ var controls = new function() {
 };
 
 var general = gui.addFolder('Superformula 3D');
-general.add(controls, 'takeImage').name('Take Screenshot');
-general.add(controls, 'exportShape').name('Export Shape');
+general.add(controls, 'takeImage').name('Take screenshot');
+general.add(controls, 'exportShape').name('Export Shape (ff)');
 general.add(controls, 'researchLink').name('Learn more');
 general.open();
 
