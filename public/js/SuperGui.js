@@ -1,10 +1,5 @@
-// gui initialize
 var gui = new dat.GUI();
 var gltfExporter = new THREE.GLTFExporter();
-
-// set time and clocks
-var date = new Date();
-var currentTime = date.getTime();
 
 var controls = new function() {
     this.takeImage = function(){ saveAsImage() };
@@ -47,7 +42,7 @@ general.open();
 
 var f0 = gui.addFolder('Form & Color');
 f0.add(controls, 'form', [ 'None', 'Lines', 'Points', 'Fullform']);
-f0.add(controls, 'wireframe').name('Show Quad Wireframe');
+// f0.add(controls, 'wireframe').name('Show Quad Wireframe');
 f0.addColor(controls, 'shapeColor1').name('Mesh Color');
 f0.addColor(controls, 'emissiveColor').name('Emissive Color');
 f0.add(controls, 'stripes', 0, 3).step(1).name('Stripe Freq');
@@ -77,65 +72,3 @@ f3.add(controls, 'a2',0.1,20);
 f3.add(controls, 'b2',0.1,20);
 f3.add(controls,'researchLink').name('Learn more');
 f3.close();
-
-// Image saving
-
-
-function saveAsImage() {
-    var imgData;
-    try {
-        var strMime = "image/jpeg";
-        var strDownloadMime = "image/octet-stream";
-        imgData = renderer.domElement.toDataURL(strMime);
-        var fileName = 'supershape-image-' + currentTime+ '.jpg';
-        saveFile(imgData.replace(strMime, strDownloadMime), fileName);
-    } catch (e) {
-        console.log(e);
-        return;
-    }
-}
-
-var saveFile = function (strData, filename) {
-    var link = document.createElement('a');
-    if (typeof link.download === 'string') {
-        document.body.appendChild(link); //Firefox requires the link to be in the body
-        link.download = filename;
-        link.href = strData;
-        link.click();
-        document.body.removeChild(link); //remove the link when done
-    } else {
-        location.replace(uri);
-    }
-}
-
-function exportGLTF( input ) {
-    var options = {};
-
-    gltfExporter.parse( input, function ( result ) {
-        var fileName = 'supershape-object-'+currentTime;
-        if ( result instanceof ArrayBuffer ) {
-            saveArrayBuffer( result, fileName +'.glb' );
-        } else {
-            var output = JSON.stringify( result, null, 2 );
-            console.log( output );
-            saveString( output, fileName+'.gltf' );
-        }
-
-    }, options );
-
-}
-
-
-function save( blob, filename ) {
-    var link = document.createElement( 'a' );
-    link.style.display = 'none';
-    document.body.appendChild( link );
-    
-    link.href = URL.createObjectURL( blob );
-    link.download = filename;
-    link.click();
-}
-
-function saveString( text, filename ) {
-    save( new Blob( [ text ], { type: 'text/plain' } ), filename );
-}
