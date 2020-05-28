@@ -37,10 +37,11 @@ var controls = new function() {
 var general = gui.addFolder('Superformula 3D');
 general.add(controls, 'takeImage').name('Take Screenshot');
 general.add(controls, 'exportShape').name('Export Shape');
-general.addColor(controls, 'backgroundColor').name('Background');
+general.add(controls, 'researchLink').name('Learn More');
 general.open();
 
 var f0 = gui.addFolder('Form & Color');
+f0.addColor(controls, 'backgroundColor').name('Background');
 f0.add(controls, 'form', [ 'None', 'Lines', 'Points', 'Fullform']);
 // f0.add(controls, 'wireframe').name('Show Quad Wireframe');
 f0.addColor(controls, 'shapeColor1').name('Mesh Color');
