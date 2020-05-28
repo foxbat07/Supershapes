@@ -1,5 +1,6 @@
 // gui initialize
 var gui = new dat.GUI();
+var gltfExporter = new THREE.GLTFExporter();
 
 // set time and clocks
 var date = new Date();
@@ -7,6 +8,7 @@ var currentTime = date.getTime();
 
 var controls = new function() {
     this.takeImage = function(){ saveAsImage() };
+    this.exportShape = function(){ exportGLTF(superShape) };
     this.researchLink = function() {window.open('http://paulbourke.net/geometry/supershape/')};
     this.backgroundColor = 0x1a1a1a;
     this.form = 'Fullform';
@@ -37,8 +39,9 @@ var controls = new function() {
     this.b2 = 1;
 };
 
-var general = gui.addFolder('Superformula 3D | MH');
+var general = gui.addFolder('Superformula 3D');
 general.add(controls, 'takeImage').name('Take Screenshot');
+general.add(controls, 'exportShape').name('Export Shape');
 general.addColor(controls, 'backgroundColor').name('Background');
 general.open();
 
@@ -103,4 +106,36 @@ var saveFile = function (strData, filename) {
     } else {
         location.replace(uri);
     }
+}
+
+function exportGLTF( input ) {
+    var options = {};
+
+    gltfExporter.parse( input, function ( result ) {
+        var fileName = 'supershape-object-'+currentTime;
+        if ( result instanceof ArrayBuffer ) {
+            saveArrayBuffer( result, fileName +'.glb' );
+        } else {
+            var output = JSON.stringify( result, null, 2 );
+            console.log( output );
+            saveString( output, fileName+'.gltf' );
+        }
+
+    }, options );
+
+}
+
+
+function save( blob, filename ) {
+    var link = document.createElement( 'a' );
+    link.style.display = 'none';
+    document.body.appendChild( link );
+    
+    link.href = URL.createObjectURL( blob );
+    link.download = filename;
+    link.click();
+}
+
+function saveString( text, filename ) {
+    save( new Blob( [ text ], { type: 'text/plain' } ), filename );
 }
