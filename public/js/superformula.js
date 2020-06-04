@@ -53,7 +53,7 @@ init();
 animate();
 
 function init(){
-    camera.position.z = 500;			
+    camera.position.z = 3;			
     trackBallControls.rotateSpeed = 5;
     trackBallControls.zoomSpeed = 2;
 

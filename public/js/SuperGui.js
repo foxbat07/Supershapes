@@ -1,7 +1,5 @@
 var gui = new dat.GUI();
 
-
-
 var controls = new function() {
     this.takeImage = function(){ saveAsImage() };
     this.exportShape = function(){ exportGLTF() };
@@ -17,13 +15,13 @@ var controls = new function() {
     this.heightSegments = 60;
     this.wireframe = false;
 
-    this.radius = 200;
+    this.radius = 1;
     this.m1 = 5;
     this.n11 = 1;
     this.n21 = 1;
     this.n31 = 2;
     
-    this.height = 200;
+    this.height = 1;
     this.m2 = 5;
     this.n12 = 1;
     this.n22 = 1;
@@ -53,7 +51,7 @@ f0.open();
 
 var f1 = gui.addFolder('Supershape 1');
 f1.add(controls, 'm1',0,100).step(1).name('m1 - lat freq');
-f1.add(controls, 'radius',1,1000);
+f1.add(controls, 'radius',0.1,5);
 f1.add(controls, 'n11',0.1,10);
 f1.add(controls, 'n21',0.1,10);
 f1.add(controls, 'n31',0.1,10);
@@ -63,7 +61,7 @@ f1.close();
 
 var f2 = gui.addFolder('Supershape 2');
 f2.add(controls, 'm2',0,100).step(1).name('m2 - long freq');
-f2.add(controls, 'height',1,1000);
+f2.add(controls, 'height',0.1,5);
 f2.add(controls, 'n12',0.1,10);
 f2.add(controls, 'n22',0.1,10);
 f2.add(controls, 'n32',0.1,10);
