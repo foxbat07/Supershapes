@@ -51,7 +51,7 @@ f0.open();
 
 var f1 = gui.addFolder('Supershape 1');
 f1.add(controls, 'm1',0,100).step(1).name('m1 - lat freq');
-f1.add(controls, 'radius',0.1,5);
+f1.add(controls, 'radius',1,5);
 f1.add(controls, 'n11',0.1,10);
 f1.add(controls, 'n21',0.1,10);
 f1.add(controls, 'n31',0.1,10);
@@ -61,7 +61,7 @@ f1.close();
 
 var f2 = gui.addFolder('Supershape 2');
 f2.add(controls, 'm2',0,100).step(1).name('m2 - long freq');
-f2.add(controls, 'height',0.1,5);
+f2.add(controls, 'height',1,5);
 f2.add(controls, 'n12',0.1,10);
 f2.add(controls, 'n22',0.1,10);
 f2.add(controls, 'n32',0.1,10);
