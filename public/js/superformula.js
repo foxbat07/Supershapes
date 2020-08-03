@@ -38,7 +38,7 @@ quadGeometry.addAttribute("position", new THREE.Vector3(0,0,0));
 // var meshMaterial = new THREE.MeshNormalMaterial( { side: THREE.DoubleSide } );
 var meshMaterial = new THREE.MeshPhongMaterial( { emissive: 0x000000, side: THREE.DoubleSide,vertexColors: THREE.FaceColors } );
 // var meshMaterial = new THREE.MeshStandardMaterial( { emissive: 0x000000, side: THREE.DoubleSide, flatShading: false, vertexColors: THREE.FaceColors } );
-var pointMaterial = new THREE.PointsMaterial( { color: 0xffffff, map: spriteMap,transparent: true, size: 1 } );
+var pointMaterial = new THREE.PointsMaterial( { color: 0xffffff, map: spriteMap,transparent: true, size: 0.01 } );
 var lineMaterial = new THREE.LineBasicMaterial( { color: 0xffffff } );
 var quadMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
 // var quadMaterial = new THREE.LineBasicMaterial({ color: "orange", opacity: 0.3, transparent: true, blending: THREE.AdditiveBlending, vertexColors: false, depthWrite: false, depthTest: true });
